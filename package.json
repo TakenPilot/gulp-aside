@@ -5,7 +5,7 @@
   "main": "index.js",
   "repository": "http://github.com/TakenPilot/gulp-aside.git",
   "scripts": {
-    "test": "./node_modules/.bin/mocha -R mocha-lcov-reporter | ./node_modules/coveralls/bin/coveralls.js"
+    "test": "./node_modules/.bin/mocha -r blanket -R mocha-lcov-reporter | ./node_modules/coveralls/bin/coveralls.js"
   },
   "config": {
     "blanket": {
