@@ -1,5 +1,15 @@
 Gulp Aside
-----------
+==========
+
+[![Build Status](https://travis-ci.org/TakenPilot/gulp-aside.svg?branch=master)](https://travis-ci.org/TakenPilot/gulp-aside)
+
+[![Code Climate](https://codeclimate.com/github/TakenPilot/gulp-aside/badges/gpa.svg)](https://codeclimate.com/github/TakenPilot/gulp-aside)
+
+[![Coverage Status](https://img.shields.io/coveralls/TakenPilot/gulp-aside.svg)](https://coveralls.io/r/TakenPilot/gulp-aside?branch=master)
+
+[![Dependencies](https://david-dm.org/TakenPilot/gulp-aside.svg?style=flat)](https://david-dm.org/TakenPilot/gulp-aside.svg?style=flat)
+
+[![NPM version](https://badge.fury.io/js/gulp-aside.svg)](http://badge.fury.io/js/gulp-aside)
 
 Apply only to files that match glob pattern.
 
