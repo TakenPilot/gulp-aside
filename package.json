@@ -1,9 +1,9 @@
 {
   "name": "gulp-aside",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Apply only to files that match pattern.",
   "main": "index.js",
-  "repository": "http://github.com/TakenPilot/gulp-aside-handlebars.git",
+  "repository": "http://github.com/TakenPilot/gulp-aside.git",
   "scripts": {
     "test": "./node_modules/.bin/mocha -R mocha-lcov-reporter | ./node_modules/coveralls/bin/coveralls.js"
   },
