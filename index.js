@@ -18,9 +18,10 @@ function forward(parentStream, childStream, streams, file, encoding, cb) {
     });
     childStream.on('readable', function() {
       var file = childStream.read();
-      if (file) {
-        parentStream.push(file);
-      }
+      //need to find example of something that uses this, but not 'data' event, aka, likely broken plugin.
+      //if (file) {
+      //  parentStream.push(file);
+      //}
     });
     streams.push(childStream);
   }
