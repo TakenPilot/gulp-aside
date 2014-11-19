@@ -5,3 +5,8 @@ html {
 body {
     color: green;
 }
+
+a:before {
+    content: 'first';
+    display: table;
+}

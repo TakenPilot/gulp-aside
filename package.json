@@ -1,6 +1,6 @@
 {
   "name": "gulp-aside",
-  "version": "0.0.3",
+  "version": "1.0.0",
   "description": "Apply only to files that match pattern.",
   "main": "index.js",
   "repository": "http://github.com/TakenPilot/gulp-aside.git",
@@ -33,6 +33,8 @@
     "chai": "^1.10.0",
     "coveralls": "^2.11.2",
     "gulp": "^3.8.10",
+    "gulp-concat": "^2.4.1",
+    "gulp-rename": "^1.2.0",
     "mocha": "^2.0.1",
     "mocha-lcov-reporter": "0.0.1",
     "sinon": "^1.12.1",

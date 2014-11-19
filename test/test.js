@@ -4,7 +4,9 @@ var aside = require('../.'),
   gulp = require('gulp'),
   gUtil = require('gulp-util'),
   through = require('through2'),
-  buffer = require('vinyl-buffer');
+  buffer = require('vinyl-buffer'),
+  rename = require('gulp-rename'),
+  concat = require('gulp-concat');
 
 /**
  * Each calls .on('data', function() {}), which turn the pipe into 'streaming' data (as much as Vinyl can be streaming).
@@ -197,8 +199,70 @@ describe('bad data', function () {
         expect(err.plugin).to.equal('test plugin');
         done();
       })
-      .pipe(gUtil.buffer(function () {
+      .pipe(gUtil.buffer(function (err, files) {
         done(new Error('Should have caused error'));
+      }));
+  });
+});
+
+describe('correct result', function () {
+  var sandbox;
+
+  beforeEach(function () {
+    sandbox = sinon.sandbox.create();
+  });
+
+  afterEach(function () {
+    sandbox.verifyAndRestore();
+  });
+
+  it('Correctly uses rename plugin', function (done) {
+    gulp.src('test/fixtures/**/*')
+      .pipe(aside('**/*.js', rename({
+        prefix: "js-"
+      })))
+      .pipe(gUtil.buffer(function (err, files) {
+        expect(files[0].relative).to.equal('js-simpleJavaScript1.js');
+        expect(files[1].relative).to.equal('js-simpleJavaScript2.js');
+        expect(files[2].relative).to.equal('simpleStylesheet1.css');
+        expect(files[3].relative).to.equal('simpleStylesheet2.css');
+        expect(files[4].relative).to.equal('simpleText1.txt');
+        expect(files[5].relative).to.equal('simpleText2.txt');
+        done();
+      }));
+  });
+
+  it('Correctly uses concat plugin', function (done) {
+    gulp.src('test/fixtures/**/*')
+      .pipe(aside('**/*.js', concat('test.js')))
+      .pipe(gUtil.buffer(function (err, files) {
+        expect(files[0].relative).to.equal('simpleStylesheet1.css');
+        expect(files[1].relative).to.equal('simpleStylesheet2.css');
+        expect(files[2].relative).to.equal('simpleText1.txt');
+        expect(files[3].relative).to.equal('simpleText2.txt');
+        expect(files[4].relative).to.equal('test.js');
+        done();
+      }));
+  });
+
+  it('Correctly uses multiple plugins', function (done) {
+    gulp.src('test/fixtures/**/*')
+      .pipe(aside('**/*.js', concat('test.js')))
+      .pipe(aside('**/*.css', rename({
+        prefix: 'css-'
+      })))
+      .pipe(aside('**/css-*.css', concat('test.css')))
+      .pipe(aside('**/test.*', rename({
+        prefix: 'found-'
+      })))
+      .pipe(gUtil.buffer(function (err, files) {
+        expect(files[0].relative).to.equal('simpleText1.txt');
+        expect(files[1].relative).to.equal('simpleText2.txt');
+        expect(files[2].relative).to.equal('found-test.js');
+        expect(files[3].relative).to.equal('found-test.css');
+        expect(files[2].contents.toString()).to.contain('first').and.contain('second');
+        expect(files[3].contents.toString()).to.contain('first').and.contain('second');
+        done();
       }));
   });
 });

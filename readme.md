@@ -11,9 +11,17 @@ Gulp Aside
 
 [![NPM version](https://badge.fury.io/js/gulp-aside.svg)](http://badge.fury.io/js/gulp-aside)
 
-Apply only to files that match glob pattern.
+Apply transform only to files that match glob pattern.
 
+Works with any other gulp plugin, as well as inline transform functions.
+
+##Apply other gulp plugins to certain files.
+
+Example of renaming stylesheets in a particular folder:
 ```js
+var aside = require('gulp-aside'),
+  rename = require('gulp-rename');
+
 gulp.src('**/*.css')
   .pipe(aside('**/certain/*.css', rename({
     prefix: "certain-"
@@ -21,10 +29,24 @@ gulp.src('**/*.css')
   .pipe(gulp.dest('public'));
 ```
 
+Example of concatenating files with the word `inline`:
 ```js
+var aside = require('gulp-aside'),
+  concat = require('gulp-concat');
+
+gulp.src('**/*.css')
+  .pipe(aside('**/*.inline.*.css', concat('inline.css')))
+  .pipe(gulp.dest('public'));
+```
+
+##Apply transform function to certain files.
+
+Example of replacing groups of whitespace with a single-space, but only in javascript files in a component folder
+```js
+var aside = require('gulp-aside');
+
 gulp.src('**/*.js')
   .pipe(aside('**/components/*.js', function (file, encoding, cb) {
-    //replace groups of whitespace with a single-space
     var str = file.contents.toString().replace(/\w*/g, ' ');
 
     file.contents = new Buffer(str);
@@ -32,3 +54,15 @@ gulp.src('**/*.js')
   }))
   .pipe(gulp.dest('public'));
 ```
+
+##Install
+
+```Sh
+npm install --save-dev gulp-aside
+```
+
+##Running Tests
+
+To run the basic tests, just run `mocha` normally.
+
+This assumes you've already installed the local npm packages with `npm install`.
