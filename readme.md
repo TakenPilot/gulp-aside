@@ -15,7 +15,7 @@ Apply transform only to files that match glob pattern.
 
 Works with any other gulp plugin, as well as inline transform functions.
 
-##Apply other gulp plugins to certain files.
+##Apply other gulp plugins to certain files
 
 Example of renaming stylesheets in a particular folder:
 ```js
@@ -29,7 +29,7 @@ gulp.src('**/*.css')
   .pipe(gulp.dest('public'));
 ```
 
-Example of concatenating files with the word `inline`:
+Example of concatenating files with the word `inline` into the new file `inline.css`:
 ```js
 var aside = require('gulp-aside'),
   concat = require('gulp-concat');
@@ -39,7 +39,7 @@ gulp.src('**/*.css')
   .pipe(gulp.dest('public'));
 ```
 
-##Apply transform function to certain files.
+##Apply inline transform function to certain files
 
 Example of replacing groups of whitespace with a single-space, but only in javascript files in a component folder
 ```js
