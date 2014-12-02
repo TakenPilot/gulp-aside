@@ -1,6 +1,6 @@
 {
   "name": "gulp-aside",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Apply only to files that match pattern.",
   "main": "index.js",
   "repository": "http://github.com/TakenPilot/gulp-aside.git",
@@ -25,7 +25,7 @@
   "license": "ISC",
   "dependencies": {
     "gulp-util": "^3.0.1",
-    "minimatch": "^1.0.0",
+    "minimatch": "^2.0.1",
     "through2": "^0.6.3"
   },
   "devDependencies": {
